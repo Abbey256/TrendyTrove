@@ -4,7 +4,7 @@ import heroBanner from "@assets/generated_images/luxury_fashion_hero_banner.png"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroBanner})` }}
@@ -15,7 +15,7 @@ export function Hero() {
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <img 
-            src="/attached_assets/WhatsApp Image 2025-11-25 at 12.02.38_6d1d8c4e_1764068609909.jpg"
+            src="/TrendytroveLogo.jpg"
             alt="TrendyTrove Logo"
             className="w-32 h-32 mx-auto mb-6 object-contain"
             data-testid="img-logo"

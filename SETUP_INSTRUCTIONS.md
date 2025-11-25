@@ -46,7 +46,7 @@ const { data, error } = await supabase.auth.admin.createUser({
   password: 'YOUR_STRONG_PASSWORD_HERE',
   email_confirm: true,
   user_metadata: {
-    full_name: 'Temiloluwa Sanusi',
+    full_name: 'TemiloluwaSanusi',
     role: 'admin'
   }
 })

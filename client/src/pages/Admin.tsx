@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Header } from "@/components/Header";
 import { AdminLogin } from "@/components/AdminLogin";
 import { AdminDashboard } from "@/components/AdminDashboard";
 import { supabase } from "@/lib/supabase";
@@ -39,9 +40,16 @@ export default function Admin() {
     );
   }
 
-  return isAuthenticated ? (
-    <AdminDashboard />
-  ) : (
-    <AdminLogin onLoginSuccess={() => setIsAuthenticated(true)} />
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <div className="pt-20">
+        {isAuthenticated ? (
+          <AdminDashboard />
+        ) : (
+          <AdminLogin onLoginSuccess={() => setIsAuthenticated(true)} />
+        )}
+      </div>
+    </div>
   );
 }

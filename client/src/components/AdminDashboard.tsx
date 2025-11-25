@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { queryClient } from "@/lib/queryClient";
 import { authRequest } from "@/lib/authRequest";
 import { supabase } from "@/lib/supabase";
-import { Plus, Edit, Trash2, LogOut, Package, MessageSquare } from "lucide-react";
+import { Plus, Edit, Trash2, LogOut, Package, MessageSquare, Upload } from "lucide-react";
 import type { Product, InsertProduct, Message } from "@shared/schema";
 
 export function AdminDashboard() {
@@ -24,6 +24,8 @@ export function AdminDashboard() {
     imageUrl: "",
     category: "",
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
 
   const { data: products, isLoading: loadingProducts } = useQuery<Product[]>({
@@ -97,14 +99,64 @@ export function AdminDashboard() {
       imageUrl: "",
       category: "",
     });
+    setSelectedFile(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const uploadImage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random()}.${fileExt}`;
+    const filePath = `products/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('product-images')
+      .upload(filePath, file);
+
+    if (uploadError) {
+      throw new Error('Failed to upload image');
+    }
+
+    const { data } = supabase.storage
+      .from('product-images')
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      // Clear the imageUrl when a file is selected
+      setFormData({ ...formData, imageUrl: "" });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editingProduct) {
-      updateProductMutation.mutate({ ...editingProduct, ...formData } as Product);
-    } else {
-      addProductMutation.mutate(formData as InsertProduct);
+    
+    try {
+      let imageUrl = formData.imageUrl;
+      
+      if (selectedFile) {
+        setUploading(true);
+        imageUrl = await uploadImage(selectedFile);
+      }
+      
+      const productData = { ...formData, imageUrl };
+      
+      if (editingProduct) {
+        updateProductMutation.mutate({ ...editingProduct, ...productData } as Product);
+      } else {
+        addProductMutation.mutate(productData as InsertProduct);
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to upload image",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -218,28 +270,60 @@ export function AdminDashboard() {
                         </Select>
                       </div>
                     </div>
-                    <div>
-                      <Label htmlFor="imageUrl">Image URL *</Label>
-                      <Input
-                        id="imageUrl"
-                        type="url"
-                        value={formData.imageUrl}
-                        onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                        placeholder="https://example.com/image.jpg"
-                        required
-                        data-testid="input-product-image"
-                      />
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Enter a direct link to the product image
-                      </p>
+                    <div className="space-y-4">
+                      <div>
+                        <Label htmlFor="imageFile">Upload Image</Label>
+                        <div className="flex items-center gap-4">
+                          <Input
+                            id="imageFile"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            className="flex-1"
+                          />
+                          {selectedFile && (
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Upload className="w-4 h-4" />
+                              {selectedFile.name}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className="relative">
+                        <div className="absolute inset-0 flex items-center">
+                          <span className="w-full border-t" />
+                        </div>
+                        <div className="relative flex justify-center text-xs uppercase">
+                          <span className="bg-background px-2 text-muted-foreground">Or</span>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="imageUrl">Image URL</Label>
+                        <Input
+                          id="imageUrl"
+                          type="url"
+                          value={formData.imageUrl}
+                          onChange={(e) => {
+                            setFormData({ ...formData, imageUrl: e.target.value });
+                            if (e.target.value) setSelectedFile(null);
+                          }}
+                          placeholder="https://example.com/image.jpg"
+                          data-testid="input-product-image"
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">
+                          Upload a file or enter a direct link to the product image
+                        </p>
+                      </div>
                     </div>
                     <div className="flex gap-3 pt-4">
                       <Button
                         type="submit"
-                        disabled={addProductMutation.isPending || updateProductMutation.isPending}
+                        disabled={addProductMutation.isPending || updateProductMutation.isPending || uploading || (!selectedFile && !formData.imageUrl)}
                         data-testid="button-save-product"
                       >
-                        {editingProduct ? "Update Product" : "Add Product"}
+                        {uploading ? "Uploading..." : editingProduct ? "Update Product" : "Add Product"}
                       </Button>
                       <Button
                         type="button"
