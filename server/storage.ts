@@ -15,6 +15,7 @@ export interface IStorage {
   // Messages
   getAllMessages(authHeader?: string): Promise<Message[]>;
   createMessage(message: InsertMessage): Promise<Message>;
+  deleteMessage(id: string, authHeader?: string): Promise<void>;
 }
 
 export class SupabaseStorage implements IStorage {
@@ -41,6 +42,7 @@ export class SupabaseStorage implements IStorage {
       description: dbProduct.description,
       price: dbProduct.price,
       imageUrl: dbProduct.image_url,
+      images: dbProduct.images || [dbProduct.image_url],
       category: dbProduct.category,
       isFeatured: dbProduct.is_featured || false,
       createdAt: dbProduct.created_at,
@@ -54,6 +56,7 @@ export class SupabaseStorage implements IStorage {
     if (product.description !== undefined) dbProduct.description = product.description;
     if (product.price !== undefined) dbProduct.price = product.price;
     if (product.imageUrl !== undefined) dbProduct.image_url = product.imageUrl;
+    if (product.images !== undefined) dbProduct.images = product.images;
     if (product.category !== undefined) dbProduct.category = product.category;
     if (product.isFeatured !== undefined) dbProduct.is_featured = product.isFeatured;
     return dbProduct;
@@ -166,6 +169,16 @@ export class SupabaseStorage implements IStorage {
 
     if (error) throw new Error(error.message);
     return this.mapMessageFromDB(data);
+  }
+
+  async deleteMessage(id: string, authHeader?: string): Promise<void> {
+    const supabase = this.getClient(authHeader);
+    const { error } = await supabase
+      .from('messages')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw new Error(error.message);
   }
 }
 

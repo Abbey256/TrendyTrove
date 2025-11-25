@@ -23,10 +23,11 @@ export function AdminDashboard() {
     description: "",
     price: "",
     imageUrl: "",
+    images: [],
     category: "",
     isFeatured: false,
   });
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
 
@@ -99,10 +100,11 @@ export function AdminDashboard() {
       description: "",
       price: "",
       imageUrl: "",
+      images: [],
       category: "",
       isFeatured: false,
     });
-    setSelectedFile(null);
+    setSelectedFiles([]);
   };
 
   const uploadImage = async (file: File): Promise<string> => {
@@ -126,10 +128,9 @@ export function AdminDashboard() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      // Clear the imageUrl when a file is selected
+    const files = Array.from(e.target.files || []);
+    if (files.length > 0) {
+      setSelectedFiles(files);
       setFormData({ ...formData, imageUrl: "" });
     }
   };
@@ -139,13 +140,18 @@ export function AdminDashboard() {
     
     try {
       let imageUrl = formData.imageUrl;
+      let images = formData.images || [];
       
-      if (selectedFile) {
+      if (selectedFiles.length > 0) {
         setUploading(true);
-        imageUrl = await uploadImage(selectedFile);
+        const uploadedUrls = await Promise.all(
+          selectedFiles.map(file => uploadImage(file))
+        );
+        images = uploadedUrls;
+        imageUrl = uploadedUrls[0];
       }
       
-      const productData = { ...formData, imageUrl };
+      const productData = { ...formData, imageUrl, images };
       
       if (editingProduct) {
         updateProductMutation.mutate({ ...editingProduct, ...productData } as Product);
@@ -155,7 +161,7 @@ export function AdminDashboard() {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "Failed to upload image",
+        description: error.message || "Failed to upload images",
         variant: "destructive",
       });
     } finally {
@@ -287,10 +293,10 @@ export function AdminDashboard() {
                             onChange={handleFileChange}
                             className="flex-1"
                           />
-                          {selectedFile && (
+                          {selectedFiles.length > 0 && (
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
                               <Upload className="w-4 h-4" />
-                              {selectedFile.name}
+                              {selectedFiles.length} file(s) selected
                             </div>
                           )}
                         </div>
@@ -313,7 +319,7 @@ export function AdminDashboard() {
                           value={formData.imageUrl}
                           onChange={(e) => {
                             setFormData({ ...formData, imageUrl: e.target.value });
-                            if (e.target.value) setSelectedFile(null);
+                            if (e.target.value) setSelectedFiles([]);
                           }}
                           placeholder="https://example.com/image.jpg"
                           data-testid="input-product-image"
@@ -340,7 +346,7 @@ export function AdminDashboard() {
                     <div className="flex gap-3 pt-4">
                       <Button
                         type="submit"
-                        disabled={addProductMutation.isPending || updateProductMutation.isPending || uploading || (!selectedFile && !formData.imageUrl)}
+                        disabled={addProductMutation.isPending || updateProductMutation.isPending || uploading || (selectedFiles.length === 0 && !formData.imageUrl)}
                         data-testid="button-save-product"
                       >
                         {uploading ? "Uploading..." : editingProduct ? "Update Product" : "Add Product"}

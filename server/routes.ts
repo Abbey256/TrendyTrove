@@ -104,6 +104,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete("/api/messages/:id", async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      await storage.deleteMessage(req.params.id, authHeader);
+      res.status(204).send();
+    } catch (error: any) {
+      if (error.message.includes('permission') || error.message.includes('policy')) {
+        return res.status(401).json({ error: "Unauthorized. Please login as admin." });
+      }
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
