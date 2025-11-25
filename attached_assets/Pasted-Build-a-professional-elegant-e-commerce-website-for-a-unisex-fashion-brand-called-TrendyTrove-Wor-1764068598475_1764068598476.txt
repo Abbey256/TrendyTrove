@@ -1,0 +1,100 @@
+Build a professional, elegant e-commerce website for a unisex fashion brand called TrendyTrove – World of Elegance. The website should be responsive, mobile-friendly, and visually luxurious. Use HTML, CSS (Tailwind CSS), JavaScript, Supabase for database and authentication, and optionally Flask/Node.js for backend if needed. Also make it's animation very impressive
+
+Website Requirements:
+
+Home Page:
+
+Display logo (TrendyTrove) and tagline: “World of Elegance.”
+
+Banner/hero section showing elegance and fashion.
+
+Featured products section with elegant hover effects.
+
+Footer with Instagram link (worldof_temiloluwa), WhatsApp contact (09014964843), email (sanusiaishat85@gmail.com
+).
+
+Store Description:
+
+“TrendyTrove – World of Elegance brings the finest unisex fashion pieces, blending modern trends with timeless elegance. Our collection features high-quality apparel and accessories for all occasions. Every item is curated to provide comfort, style, and sophistication. Shop with ease, and let elegance define your look.”
+
+Product Catalog:
+
+Dynamically load products from Supabase database.
+
+Each product card shows image, name, price, and short description.
+
+Clicking a product shows a larger image, full description, and a “Chat & Order via WhatsApp” button.
+
+Admin Panel (Private, Secure):
+
+Use Supabase Authentication.
+
+Automatically create an admin account for:
+
+Name: Temiloluwa Sanusi
+
+Email: sanusiaishat85@gmail.com
+
+Business/WhatsApp: 09014964843
+
+Instagram: worldof_temiloluwa
+
+Admin panel allows:
+
+Add new products (image, name, price, description, category).
+
+Edit product details.
+
+Delete products.
+
+The Add/Edit/Delete buttons are only visible to admin after login.
+
+Admin can log in anytime to update the catalog easily.
+
+Chat & Checkout:
+
+Each product page should have a “Chat & Order via WhatsApp” button.
+
+Clicking it opens WhatsApp with a pre-filled message including:
+
+Product name
+
+Price
+
+Quantity (default 1)
+
+Customer name
+
+Optional notes field
+
+The message goes to admin’s WhatsApp: 09014964843.
+
+Extra Features & Styling:
+
+Luxury, minimalist design using Tailwind CSS.
+
+Responsive grid layout for products.
+
+Smooth hover animations.
+
+Carousel for featured products on homepage.
+
+Include a contact form (optional) for direct messages. and that i will reveice in the admin panel
+
+Elegant color palette: whites, golds, and soft neutral shades.
+
+Future Ready:
+
+Structure the code so Paystack/Stripe integration can be added later.
+
+Database schema in Supabase should be scalable (product table: id, name, description, price, image_url, category).
+
+Instructions for Supabase Integration:
+
+Connect frontend to Supabase for fetching products.
+
+Use Supabase Auth for admin login.
+
+Pre-create admin account using Supabase Admin API with strong password.
+
+Deliver a complete project template ready to run on Render so that Temiloluwa can log in and manage products immediately, and customers can browse elegantly and order via WhatsApp seamlessly.
