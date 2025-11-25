@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-              <h3 className="font-serif text-2xl font-medium">The Light Bearer</h3>
+              <h3 className="font-serif text-2xl font-medium">TheLightBrand</h3>
               <a 
                 href="/admin" 
                 className="w-2 h-2 rounded-full bg-primary hover:bg-primary/80 transition-colors" 
@@ -16,11 +16,14 @@ export function Footer() {
                 aria-label="Admin Access"
               />
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              World of Elegance brings the finest unisex fashion pieces, blending modern trends with timeless elegance.
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4 italic">
+              Unwrapping elegance. Revealing you.
             </p>
-            <p className="text-sm text-muted-foreground italic">
-              Every item curated to provide comfort, style, and sophistication.
+            <p className="text-sm text-muted-foreground">
+              Be Light. Wear Light. Give Light.
+            </p>
+            <p className="text-xs text-muted-foreground mt-2">
+              Jewellery • Gifts • Accessories
             </p>
           </div>
 
@@ -91,7 +94,7 @@ export function Footer() {
 
         <div className="border-t border-border pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} The Light Bearer – World of Elegance. All rights reserved.
+            © {new Date().getFullYear()} TheLightBrand – Unwrapping elegance. Revealing you. All rights reserved.
           </p>
         </div>
       </div>

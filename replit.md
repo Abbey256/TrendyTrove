@@ -1,10 +1,14 @@
-# The Light Bearer – World of Elegance
+# TheLightBrand – Unwrapping elegance. Revealing you.
 
-A luxury e-commerce website for unisex fashion, built with modern web technologies and elegant design.
+A luxury e-commerce website for jewellery, gifts, and accessories, built with modern web technologies and elegant design.
 
 ## Overview
 
-**The Light Bearer** is a professional, elegant e-commerce platform for a unisex fashion brand. The application provides a beautiful storefront for customers to browse products and place orders via WhatsApp, plus a secure admin panel for product management.
+**TheLightBrand** is a professional, elegant e-commerce platform for a unisex jewellery and accessories brand. The application provides a beautiful storefront for customers to browse products and place orders via WhatsApp, plus a secure admin panel for product management.
+
+**Brand Slogan**: "Unwrapping elegance. Revealing you."
+**Tagline**: "Be Light. Wear Light. Give Light."
+**Categories**: Jewellery • Gifts • Accessories
 
 ## Project Architecture
 
@@ -30,7 +34,7 @@ A luxury e-commerce website for unisex fashion, built with modern web technologi
 ## Features
 
 ### Customer Features
-1. **Hero Section**: Full-screen banner with The Light Bearer branding and "World of Elegance" tagline
+1. **Hero Section**: Full-screen banner with TheLightBrand logo and rotating brand messaging
 2. **Featured Carousel**: Auto-playing product showcase with navigation
 3. **Product Catalog**: Responsive grid with elegant hover effects
 4. **Product Details**: Modal with full product information and multi-image gallery
@@ -110,4 +114,4 @@ Planned features for future phases:
 
 ## Store Description
 
-"The Light Bearer – World of Elegance brings the finest unisex fashion pieces, blending modern trends with timeless elegance. Our collection features high-quality apparel and accessories for all occasions. Every item is curated to provide comfort, style, and sophistication. Shop with ease, and let elegance define your look."
+"TheLightBrand – Unwrapping elegance. Revealing you. Be Light. Wear Light. Give Light. We bring the finest jewellery, gifts, and accessories, crowned with grace and beauty. Every item is curated to provide comfort, style, and sophistication. Shop with ease, and let elegance define your look."

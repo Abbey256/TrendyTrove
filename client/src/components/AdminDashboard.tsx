@@ -201,7 +201,7 @@ export function AdminDashboard() {
       <header className="border-b bg-card sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div>
-            <h1 className="font-serif text-2xl font-medium">The Light Bearer Admin</h1>
+            <h1 className="font-serif text-2xl font-medium">TheLightBrand Admin</h1>
             <p className="text-sm text-muted-foreground">Temiloluwa Sanusi</p>
           </div>
           <Button variant="outline" onClick={handleLogout} data-testid="button-logout">

@@ -10,32 +10,32 @@ import slide5 from "@assets/WhatsApp Image 2025-11-25 at 15.04.21_6deffe6a_17641
 const slides = [
   {
     image: slide1,
-    title: "THE LIGHT BEARER",
-    subtitle: "World of Elegance",
-    description: "Discover the finest unisex fashion pieces, blending modern trends with timeless elegance"
+    title: "TheLightBrand",
+    subtitle: "Unwrapping elegance. Revealing you.",
+    description: "Jewellery • Gifts • Accessories"
   },
   {
     image: slide2,
-    title: "SOPHISTICATED STYLE",
-    subtitle: "Define Your Look",
-    description: "Curated collections that embody luxury, comfort, and contemporary fashion"
+    title: "Be Light. Wear Light. Give Light.",
+    subtitle: "Unwrapping elegance. Revealing you.",
+    description: "Discover the finest unisex pieces, blending modern trends with timeless elegance"
   },
   {
     image: slide3,
-    title: "TIMELESS FASHION",
-    subtitle: "Every Occasion",
-    description: "From casual elegance to statement pieces, find your perfect match"
+    title: "Crowned with grace and beauty.",
+    subtitle: "Jewellery • Gifts • Accessories",
+    description: "Curated collections that embody luxury, comfort, and contemporary fashion"
   },
   {
     image: slide4,
-    title: "UNISEX COLLECTION",
-    subtitle: "Fashion Without Boundaries",
+    title: "TheLightBrand",
+    subtitle: "Be Light. Wear Light. Give Light.",
     description: "Versatile pieces designed for everyone who values style and quality"
   },
   {
     image: slide5,
-    title: "PREMIUM QUALITY",
-    subtitle: "Exceptional Craftsmanship",
+    title: "Unwrapping elegance. Revealing you.",
+    subtitle: "Crowned with grace and beauty.",
     description: "Every item selected for its superior quality and lasting elegance"
   }
 ];
@@ -72,8 +72,8 @@ export function Hero() {
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
         <div className="mb-6 sm:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <img 
-            src="/TrendytroveLogo.jpg"
-            alt="The Light Bearer Logo"
+            src="/TheLightBrandLogo.png"
+            alt="TheLightBrand Logo"
             className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6 object-contain"
             data-testid="img-logo"
           />

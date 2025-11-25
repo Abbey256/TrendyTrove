@@ -10,12 +10,12 @@ export function Header() {
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <img 
-            src="/TrendytroveLogo.jpg" 
-            alt="The Light Bearer Logo" 
+            src="/TheLightBrandLogo.png" 
+            alt="TheLightBrand Logo" 
             className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
           />
           <span className="font-serif text-lg sm:text-2xl font-semibold text-gray-900">
-            The Light Bearer
+            TheLightBrand
           </span>
         </div>
         

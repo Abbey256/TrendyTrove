@@ -32,7 +32,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       if (data.user) {
         toast({
           title: "Login Successful",
-          description: "Welcome to The Light Bearer Admin Panel",
+          description: "Welcome to TheLightBrand Admin Panel",
         });
         onLoginSuccess();
       }
@@ -55,7 +55,7 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
             Admin Login
           </CardTitle>
           <CardDescription>
-            The Light Bearer – World of Elegance
+            TheLightBrand – Unwrapping elegance. Revealing you.
           </CardDescription>
         </CardHeader>
         <CardContent>

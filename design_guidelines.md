@@ -1,7 +1,14 @@
-# The Light Bearer – World of Elegance Design Guidelines
+# TheLightBrand – Unwrapping elegance. Revealing you.
 
 ## Design Approach
-**Reference-Based Luxury E-commerce**: Drawing inspiration from luxury fashion websites like Net-a-Porter, Farfetch, and minimalist brands like Everlane. Focus on sophisticated elegance with breathing room for products to shine.
+**Reference-Based Luxury E-commerce**: Drawing inspiration from luxury fashion and jewellery websites like Cartier, Tiffany & Co., and minimalist brands. Focus on sophisticated elegance with breathing room for products to shine.
+
+## Brand Identity
+- **Brand Name**: TheLightBrand
+- **Slogan**: "Unwrapping elegance. Revealing you."
+- **Tagline**: "Be Light. Wear Light. Give Light."
+- **Secondary Message**: "Crowned with grace and beauty."
+- **Categories**: Jewellery • Gifts • Accessories
 
 ## Core Design Principles
 1. **Luxurious Minimalism**: Clean layouts with generous whitespace, allowing products to be the hero
@@ -28,12 +35,13 @@
 ## Component Library
 
 ### Hero Section
-- Full-viewport height (min-h-screen) with elegant fashion imagery
-- Centered logo with tagline "World of Elegance" 
+- Full-viewport height (min-h-screen) with elegant fashion/jewellery imagery
+- Centered TheLightBrand logo with rotating brand messages
 - Overlay with subtle gradient for text legibility
 - CTA button with blurred backdrop-blur-sm background
-- Auto-rotating slideshow with smooth transitions
+- Auto-rotating slideshow with smooth transitions (5 second intervals)
 - No navigation arrows for cleaner mobile experience
+- Dot indicators for slide selection
 
 ### Product Cards
 - Clean white cards with subtle shadow on hover (hover:shadow-xl)
@@ -67,6 +75,7 @@
 - Social icons with soft hover effects
 - Elegant divider line above footer
 - Contact info with icons
+- Brand slogan and tagline displayed
 
 ## Animations (Impressive but Refined)
 - **Product Cards**: Gentle scale on hover (scale-105), opacity shifts
@@ -78,13 +87,13 @@
 
 ## Images
 ### Hero Image
-Large, full-width hero image showcasing elegant fashion photography - model in sophisticated outfit against minimalist background. Image should convey luxury and timeless style.
+Large, full-width hero image showcasing elegant jewellery or fashion photography - products against minimalist background. Image should convey luxury and timeless style.
 
 ### Product Images
 High-quality product photography on clean white or soft neutral backgrounds. Images should be consistent in lighting and style across the catalog.
 
 ### Featured Section
-Lifestyle images showing products in elegant contexts - minimal styling, focus on the garment/accessory.
+Lifestyle images showing products in elegant contexts - minimal styling, focus on the jewellery/accessory.
 
 ## Color Usage (Applied Later)
 Structure for whites, golds, and soft neutrals:
@@ -109,4 +118,4 @@ Structure for whites, golds, and soft neutrals:
 - No navigation arrows on hero slideshow for cleaner mobile view
 - Responsive text sizing (smaller on mobile, larger on desktop)
 
-This design creates a premium, accessible shopping experience that positions The Light Bearer as a sophisticated fashion destination.
+This design creates a premium, accessible shopping experience that positions TheLightBrand as a sophisticated jewellery and accessories destination.
