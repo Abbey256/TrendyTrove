@@ -15,7 +15,7 @@ export function Header() {
           </span>
         </div>
         
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="flex items-center space-x-8">
           <a href="#home" className="text-gray-700 hover:text-gray-900 transition-colors">
             Home
           </a>
@@ -26,10 +26,6 @@ export function Header() {
             Contact
           </a>
         </nav>
-        
-        <Button variant="outline" size="sm">
-          Admin
-        </Button>
       </div>
     </header>
   );

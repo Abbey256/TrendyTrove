@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS products (
   price DECIMAL(10, 2) NOT NULL,
   image_url TEXT NOT NULL,
   category TEXT NOT NULL,
+  is_featured BOOLEAN DEFAULT FALSE NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
 );
 

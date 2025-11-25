@@ -7,7 +7,15 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div className="text-center md:text-left">
-            <h3 className="font-serif text-2xl font-medium mb-4">TrendyTrove</h3>
+            <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
+              <h3 className="font-serif text-2xl font-medium">TrendyTrove</h3>
+              <a 
+                href="/admin" 
+                className="w-2 h-2 rounded-full bg-primary hover:bg-primary/80 transition-colors" 
+                title="Admin Access"
+                aria-label="Admin Access"
+              />
+            </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">
               World of Elegance brings the finest unisex fashion pieces, blending modern trends with timeless elegance.
             </p>

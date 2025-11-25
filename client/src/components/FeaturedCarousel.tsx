@@ -1,37 +1,17 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import jacketImg from "@assets/generated_images/featured_product_jacket.png";
-import accessoriesImg from "@assets/generated_images/featured_accessories.png";
-import footwearImg from "@assets/generated_images/featured_footwear.png";
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: "Minimalist Luxury Jacket",
-    price: "₦45,000",
-    image: jacketImg,
-    description: "Timeless sophistication meets modern design"
-  },
-  {
-    id: 2,
-    name: "Premium Accessories",
-    price: "₦32,000",
-    image: accessoriesImg,
-    description: "Elevate your style with refined elegance"
-  },
-  {
-    id: 3,
-    name: "Elegant Footwear",
-    price: "₦38,000",
-    image: footwearImg,
-    description: "Step into luxury with contemporary comfort"
-  }
-];
+import type { Product } from "@shared/schema";
 
 export function FeaturedCarousel() {
+  const { data: allProducts } = useQuery<Product[]>({
+    queryKey: ["/api/products"],
+  });
+
+  const featuredProducts = allProducts?.filter(product => product.isFeatured) || [];
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -57,6 +37,10 @@ export function FeaturedCarousel() {
 
   const scrollPrev = () => emblaApi?.scrollPrev();
   const scrollNext = () => emblaApi?.scrollNext();
+
+  if (!featuredProducts || featuredProducts.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-20 px-6 bg-background">
@@ -85,7 +69,7 @@ export function FeaturedCarousel() {
                   <Card className="overflow-hidden group hover-elevate transition-all duration-500 border-card-border" data-testid={`card-featured-${product.id}`}>
                     <div className="aspect-square overflow-hidden bg-muted">
                       <img
-                        src={product.image}
+                        src={product.imageUrl}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         data-testid={`img-featured-${product.id}`}
@@ -99,7 +83,7 @@ export function FeaturedCarousel() {
                         {product.description}
                       </p>
                       <p className="text-primary text-lg font-medium" data-testid={`text-featured-price-${product.id}`}>
-                        {product.price}
+                        ₦{parseFloat(product.price).toLocaleString()}
                       </p>
                     </CardContent>
                   </Card>

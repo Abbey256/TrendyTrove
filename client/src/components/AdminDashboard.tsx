@@ -11,7 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 import { queryClient } from "@/lib/queryClient";
 import { authRequest } from "@/lib/authRequest";
 import { supabase } from "@/lib/supabase";
-import { Plus, Edit, Trash2, LogOut, Package, MessageSquare, Upload } from "lucide-react";
+import { Plus, Edit, Trash2, LogOut, Package, MessageSquare, Upload, Star } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import type { Product, InsertProduct, Message } from "@shared/schema";
 
 export function AdminDashboard() {
@@ -23,6 +24,7 @@ export function AdminDashboard() {
     price: "",
     imageUrl: "",
     category: "",
+    isFeatured: false,
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -98,6 +100,7 @@ export function AdminDashboard() {
       price: "",
       imageUrl: "",
       category: "",
+      isFeatured: false,
     });
     setSelectedFile(null);
   };
@@ -317,6 +320,20 @@ export function AdminDashboard() {
                         </p>
                       </div>
                     </div>
+                    <div className="flex items-center space-x-2 p-4 bg-muted/50 rounded-lg">
+                      <Checkbox
+                        id="isFeatured"
+                        checked={formData.isFeatured || false}
+                        onCheckedChange={(checked) => setFormData({ ...formData, isFeatured: checked as boolean })}
+                        data-testid="checkbox-featured"
+                      />
+                      <div className="flex items-center gap-2">
+                        <Star className="w-4 h-4 text-primary" />
+                        <Label htmlFor="isFeatured" className="cursor-pointer">
+                          Mark as Featured Product
+                        </Label>
+                      </div>
+                    </div>
                     <div className="flex gap-3 pt-4">
                       <Button
                         type="submit"
@@ -357,7 +374,12 @@ export function AdminDashboard() {
                           className="w-24 h-24 object-cover rounded-md bg-muted"
                         />
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-medium truncate">{product.name}</h3>
+                          <div className="flex items-center gap-2">
+                            <h3 className="font-medium truncate">{product.name}</h3>
+                            {product.isFeatured && (
+                              <Star className="w-4 h-4 text-primary fill-primary" />
+                            )}
+                          </div>
                           <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
                           <div className="flex items-center gap-4 mt-2">
                             <span className="text-primary font-medium">
