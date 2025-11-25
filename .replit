@@ -14,6 +14,10 @@ run = ["npm", "run", "start"]
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 34817
+externalPort = 3001
+
 [env]
 PORT = "5000"
 
@@ -37,3 +41,9 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[userenv]
+
+[userenv.shared]
+VITE_SUPABASE_URL = "https://idcecgmdwiypigplbhvh.supabase.co"
+VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkY2VjZ21kd2l5cGlncGxiaHZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMDk1NzksImV4cCI6MjA3OTU4NTU3OX0.KAL8a9fuD9gakae0EGMd2QI8sHCD4E965a1wmGLCBJI"
