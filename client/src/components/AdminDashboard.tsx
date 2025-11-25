@@ -94,6 +94,23 @@ export function AdminDashboard() {
     },
   });
 
+  const deleteMessageMutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await authRequest("DELETE", `/api/messages/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/messages"] });
+      toast({ title: "Success", description: "Message deleted successfully" });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to delete message",
+        variant: "destructive",
+      });
+    },
+  });
+
   const resetForm = () => {
     setFormData({
       name: "",
@@ -290,13 +307,30 @@ export function AdminDashboard() {
                             id="imageFile"
                             type="file"
                             accept="image/*"
+                            multiple
                             onChange={handleFileChange}
                             className="flex-1"
                           />
                           {selectedFiles.length > 0 && (
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Upload className="w-4 h-4" />
-                              {selectedFiles.length} file(s) selected
+                            <div className="space-y-2">
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Upload className="w-4 h-4" />
+                                {selectedFiles.length} file(s) selected
+                              </div>
+                              <div className="flex gap-2 flex-wrap">
+                                {selectedFiles.map((file, index) => (
+                                  <div key={index} className="relative">
+                                    <img
+                                      src={URL.createObjectURL(file)}
+                                      alt={`Preview ${index + 1}`}
+                                      className="w-16 h-16 object-cover rounded border"
+                                    />
+                                    <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                                      {index + 1}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           )}
                         </div>
@@ -325,7 +359,7 @@ export function AdminDashboard() {
                           data-testid="input-product-image"
                         />
                         <p className="text-xs text-muted-foreground mt-1">
-                          Upload a file or enter a direct link to the product image
+                          Upload multiple files or enter a direct link to the main product image
                         </p>
                       </div>
                     </div>
@@ -377,11 +411,18 @@ export function AdminDashboard() {
                   {products.map((product) => (
                     <Card key={product.id} className="p-4" data-testid={`card-admin-product-${product.id}`}>
                       <div className="flex gap-4">
-                        <img
-                          src={product.imageUrl}
-                          alt={product.name}
-                          className="w-24 h-24 object-cover rounded-md bg-muted"
-                        />
+                        <div className="relative">
+                          <img
+                            src={product.imageUrl}
+                            alt={product.name}
+                            className="w-24 h-24 object-cover rounded-md bg-muted"
+                          />
+                          {product.images && product.images.length > 1 && (
+                            <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                              {product.images.length}
+                            </span>
+                          )}
+                        </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2">
                             <h3 className="font-medium truncate">{product.name}</h3>
@@ -449,9 +490,23 @@ export function AdminDashboard() {
                           <p className="font-medium">{message.customerName}</p>
                           <p className="text-sm text-muted-foreground">{message.email}</p>
                         </div>
-                        <span className="text-xs text-muted-foreground">
-                          {new Date(message.createdAt).toLocaleDateString()}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-muted-foreground">
+                            {new Date(message.createdAt).toLocaleDateString()}
+                          </span>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            className="h-6 w-6"
+                            onClick={() => {
+                              if (confirm("Are you sure you want to delete this message?")) {
+                                deleteMessageMutation.mutate(message.id);
+                              }
+                            }}
+                          >
+                            <Trash2 className="w-3 h-3 text-destructive" />
+                          </Button>
+                        </div>
                       </div>
                       <p className="text-sm">{message.message}</p>
                     </Card>
