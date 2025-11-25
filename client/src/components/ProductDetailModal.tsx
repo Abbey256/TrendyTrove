@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { MessageCircle, Package, ShoppingBag } from "lucide-react";
+import { MessageCircle, Package, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@shared/schema";
 
 interface ProductDetailModalProps {
@@ -18,6 +18,19 @@ export function ProductDetailModal({ product, open, onOpenChange }: ProductDetai
   const [customerName, setCustomerName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState("");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const allImages = product.images && product.images.length > 0 
+    ? product.images 
+    : [product.imageUrl];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
+  };
 
   const handleWhatsAppOrder = () => {
     const message = `Hi! I'm interested in ordering:
@@ -36,7 +49,12 @@ Please confirm availability and provide next steps for purchase.`;
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={(isOpen) => {
+      if (!isOpen) {
+        setCurrentImageIndex(0);
+      }
+      onOpenChange(isOpen);
+    }}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-serif text-2xl font-light">
@@ -46,14 +64,63 @@ Please confirm availability and provide next steps for purchase.`;
 
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <div className="aspect-square rounded-md overflow-hidden bg-muted">
+            <div className="relative aspect-square rounded-md overflow-hidden bg-muted">
               <img
-                src={product.imageUrl}
+                src={allImages[currentImageIndex]}
                 alt={product.name}
                 className="w-full h-full object-cover"
                 data-testid="img-modal-product"
               />
+              
+              {allImages.length > 1 && (
+                <>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm border-white/50 hover:bg-white/90 h-8 w-8"
+                    onClick={prevImage}
+                    data-testid="button-prev-image"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm border-white/50 hover:bg-white/90 h-8 w-8"
+                    onClick={nextImage}
+                    data-testid="button-next-image"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                    {currentImageIndex + 1} / {allImages.length}
+                  </div>
+                </>
+              )}
             </div>
+            
+            {allImages.length > 1 && (
+              <div className="flex gap-2 overflow-x-auto pb-2">
+                {allImages.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all ${
+                      index === currentImageIndex 
+                        ? 'border-primary ring-2 ring-primary/20' 
+                        : 'border-transparent hover:border-gray-300'
+                    }`}
+                    data-testid={`button-thumbnail-${index}`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${product.name} - Image ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="space-y-6">

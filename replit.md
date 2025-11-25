@@ -1,10 +1,10 @@
-# TrendyTrove – World of Elegance
+# The Light Bearer – World of Elegance
 
 A luxury e-commerce website for unisex fashion, built with modern web technologies and elegant design.
 
 ## Overview
 
-**TrendyTrove** is a professional, elegant e-commerce platform for a unisex fashion brand. The application provides a beautiful storefront for customers to browse products and place orders via WhatsApp, plus a secure admin panel for product management.
+**The Light Bearer** is a professional, elegant e-commerce platform for a unisex fashion brand. The application provides a beautiful storefront for customers to browse products and place orders via WhatsApp, plus a secure admin panel for product management.
 
 ## Project Architecture
 
@@ -30,10 +30,10 @@ A luxury e-commerce website for unisex fashion, built with modern web technologi
 ## Features
 
 ### Customer Features
-1. **Hero Section**: Full-screen banner with TrendyTrove branding and "World of Elegance" tagline
+1. **Hero Section**: Full-screen banner with The Light Bearer branding and "World of Elegance" tagline
 2. **Featured Carousel**: Auto-playing product showcase with navigation
 3. **Product Catalog**: Responsive grid with elegant hover effects
-4. **Product Details**: Modal with full product information
+4. **Product Details**: Modal with full product information and multi-image gallery
 5. **WhatsApp Checkout**: Pre-filled WhatsApp message with product details, customer name, quantity
 6. **Contact Form**: Send messages directly to admin panel
 7. **Responsive Design**: Mobile-friendly across all devices
@@ -41,7 +41,7 @@ A luxury e-commerce website for unisex fashion, built with modern web technologi
 ### Admin Features
 1. **Supabase Authentication**: Secure login for admin (sanusiaishat85@gmail.com)
 2. **Product Management**: 
-   - Add products (name, description, price, category, image URL)
+   - Add products (name, description, price, category, multiple images)
    - Edit existing products
    - Delete products
 3. **Message Inbox**: View customer messages from contact form
@@ -56,7 +56,9 @@ A luxury e-commerce website for unisex fashion, built with modern web technologi
 - description (text)
 - price (decimal)
 - imageUrl (text)
+- images (text array)
 - category (text)
+- isFeatured (boolean)
 - createdAt (timestamp)
 ```
 
@@ -108,4 +110,4 @@ Planned features for future phases:
 
 ## Store Description
 
-"TrendyTrove – World of Elegance brings the finest unisex fashion pieces, blending modern trends with timeless elegance. Our collection features high-quality apparel and accessories for all occasions. Every item is curated to provide comfort, style, and sophistication. Shop with ease, and let elegance define your look."
+"The Light Bearer – World of Elegance brings the finest unisex fashion pieces, blending modern trends with timeless elegance. Our collection features high-quality apparel and accessories for all occasions. Every item is curated to provide comfort, style, and sophistication. Shop with ease, and let elegance define your look."

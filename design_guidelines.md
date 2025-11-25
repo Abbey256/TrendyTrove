@@ -1,4 +1,4 @@
-# TrendyTrove – World of Elegance Design Guidelines
+# The Light Bearer – World of Elegance Design Guidelines
 
 ## Design Approach
 **Reference-Based Luxury E-commerce**: Drawing inspiration from luxury fashion websites like Net-a-Porter, Farfetch, and minimalist brands like Everlane. Focus on sophisticated elegance with breathing room for products to shine.
@@ -32,6 +32,8 @@
 - Centered logo with tagline "World of Elegance" 
 - Overlay with subtle gradient for text legibility
 - CTA button with blurred backdrop-blur-sm background
+- Auto-rotating slideshow with smooth transitions
+- No navigation arrows for cleaner mobile experience
 
 ### Product Cards
 - Clean white cards with subtle shadow on hover (hover:shadow-xl)
@@ -46,10 +48,18 @@
 - Elegant navigation dots below
 - Smooth transition-all duration-500
 
+### Product Detail Modal
+- Multi-image gallery with thumbnail navigation
+- Previous/next buttons for image navigation
+- Image counter indicator
+- Full product information on the right side
+- WhatsApp order integration
+
 ### Admin Panel
 - Clean dashboard layout with sidebar navigation
 - Form inputs with soft borders (border-gray-200)
 - Upload area with dashed border and elegant icon
+- Multiple image upload support with preview
 - Success/error states with subtle color feedback
 
 ### Footer
@@ -62,7 +72,6 @@
 - **Product Cards**: Gentle scale on hover (scale-105), opacity shifts
 - **Carousel**: Smooth fade transitions between slides
 - **Page Load**: Subtle stagger effect for product grid items (delay each by 100ms)
-- **Scroll Animations**: Fade-up effect for sections as they enter viewport
 - **Image Hover**: Slight zoom effect on product images (transform scale-110)
 - **Buttons**: Smooth color and shadow transitions
 - **Admin Actions**: Success checkmarks with bounce animation
@@ -97,5 +106,7 @@ Structure for whites, golds, and soft neutrals:
 - Sticky header with condensed logo
 - Touch-friendly button sizes (min 44px height)
 - Carousel swipe gestures enabled
+- No navigation arrows on hero slideshow for cleaner mobile view
+- Responsive text sizing (smaller on mobile, larger on desktop)
 
-This design creates a premium, accessible shopping experience that positions TrendyTrove as a sophisticated fashion destination.
+This design creates a premium, accessible shopping experience that positions The Light Bearer as a sophisticated fashion destination.
